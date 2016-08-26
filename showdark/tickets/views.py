@@ -1,18 +1,13 @@
 from django.shortcuts import render
-from django.views import generic
-from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Permission
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+# from django.urls import reverse
 from django.views import generic
 
 # Create your views here.
-
-
-class Index(generic.TemplateView):
-    template_name = 'tickets/index.html'
 
 
 class Register(generic.TemplateView):
@@ -43,7 +38,6 @@ def loginUser(self, request):
 def registerUser(request):
 # class registerUser(generic.TemplateView):
 
-
     '''
     Registration module for new users
     '''
@@ -54,7 +48,7 @@ def registerUser(request):
     email = request.POST['email']
 
     user = User.objects.create_user(username=userName, password=passWord, first_name=firstName,
-            lastname=lastName, email=email)
+            last_name=lastName, email=email)
 
     # Permissions
     # Add
@@ -71,6 +65,7 @@ def registerUser(request):
     user.has_perm('tickets.delete_UserEvent')
 
     user.save()
+    return HttpResponseRedirect('/tickets/profile')
 
 
 def authenticateUser(self, userName, passWord):
@@ -92,3 +87,11 @@ def logoutUser(request):
     '''
     logout(request)
     # Redirect to success page
+
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the future login page.")
+
+
+class Profile(generic.TemplateView):
+    template_name = 'tickets/profile.html'
