@@ -10,10 +10,16 @@ class User(models.Model):
     eMail = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
 
-class UserEvent(models.Model):
+class Venue(models.Model):
 
-    userId = models.ForeignKey(User, on_delete=models.CASCADE)
-    eventID = models.ForeignKey(Event, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    streetAddress = models.CharField(max_length=300)
+    city = models.CharField(max_length=20)
+    state = models.CharField(max_length=20)
+    zipCode = models.IntegerField(default=0)
+    capacity = models.IntegerField(default=0)
+    contact = models.CharField(max_length=30)
+
 
 class Event(models.Model):
 
@@ -24,12 +30,7 @@ class Event(models.Model):
     beginTime = models.DateTimeField('Start Time')
     endTime = models.DateTimeField('End Time')
 
-class Venue(models.Model):
+class UserEvent(models.Model):
 
-    name = models.CharField(max_length=200)
-    streetAddress = models.CharField(max_length=300)
-    city = models.CharField(max_length=20)
-    state = models.CharField(max_length=20)
-    zipCode = models.IntergerField(default=0)
-    capacity = models.IntegerField(default=0)
-    contact = models.CharField(max_length=30)
+    userId = models.ForeignKey(User, on_delete=models.CASCADE)
+    eventID = models.ForeignKey(Event, on_delete=models.CASCADE)
