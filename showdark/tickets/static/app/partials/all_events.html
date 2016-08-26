@@ -1,0 +1,11 @@
+<section ng-controller="AllEventsCtrl">
+    <h1>((title))</h1>
+    <div>
+      <ul ng-repeat="event in events">
+        <li>((event.fields.name))</li>
+        <li>((event.fields.beginTime))</li>
+        <li>((event.fields.city))</li>
+        <button ng-click="register_for_event(event)">Register</button>
+      </ul>
+    </div>
+</section>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
@@ -5,8 +6,11 @@ from django.core import serializers
 from django.http import HttpResponse
 from .models import *
 
-class IndexView(generic.TemplateView):
-	template_name = "index.html"
+def index(request):
+    return HttpResponse("Hello, world. You're at the future login page.")
+
+class Profile(generic.TemplateView):
+    template_name = 'tickets/profile.html'
 
 def get_users_events(request, user_id):
 	user = get_object_or_404(User, pk=user_id)
@@ -32,4 +36,5 @@ def get_all_venues(request):
 		return HttpResponse(data, content_type="application/json")
 	except:
 		return "No venues registered"
+
 
