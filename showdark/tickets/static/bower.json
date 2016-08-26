@@ -1,0 +1,17 @@
+{
+  "name": "showdark",
+  "homepage": "https://github.com/nss-day-cohort-13/eventshine-showdark",
+  "authors": [
+    "Jessica Wynn <Jessicashinjo@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
