@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from tickets import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^login/', views.Login.as_view(), name="login"),
+    url(r'^loginUser/', views.loginUser, name="loginUser"),
+    url(r'^register/', views.Register.as_view(), name="register"),
+    url(r'^registerUser/', views.registerUser, name="registerUser"),
+
+    # url(r'^registerUser/', views.registerUser.as_view(), name="registerUser"),
+
 ]
