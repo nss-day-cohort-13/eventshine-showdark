@@ -1,17 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
-
-class User(models.Model):
-
-    firstName =  models.CharField(max_length=20)
-    lastName = models.CharField(max_length=20)
-    userName = models.CharField(max_length=20)
-    eMail = models.CharField(max_length=20)
-    password = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.firstName + " " + self.lastName
 
 class Venue(models.Model):
 
@@ -35,10 +24,13 @@ class Event(models.Model):
     city = models.CharField(max_length=20)
     beginTime = models.DateTimeField('Start Time')
     endTime = models.DateTimeField('End Time')
+    full = models.IntegerField(default=0)
+    tickets_sold = models.IntegerField(default=0)
 
 
     def __str__(self):
         return self.name
+
 
 class UserEvent(models.Model):
 

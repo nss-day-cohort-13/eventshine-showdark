@@ -1,7 +1,14 @@
+<!-- This has not been tested yet. It should show all events that the user is
+registered for-->
+
 <section ng-controller="UserEventsCtrl">
     <h1>((title))</h1>
     <div>
         <div ng-repeat="event in user_events">
+            <!-- nested ng-repeats. The venue itself is not part of the event
+                so you have to call the events separately and match the venue id
+                to the venue id on the event. The if statement is comparing
+                venue id with event venue id-->
             <div ng-repeat="venue in event_venues" ng-if="venue.pk==event.fields.venueId">
                 <h3>((event.fields.name))</h3>
                 <p>((event.fields.description))</p>

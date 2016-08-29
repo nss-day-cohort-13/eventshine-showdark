@@ -6,9 +6,11 @@ app.controller("UserEventsCtrl", function ($scope, $http){
     $scope.user_events = []
     $scope.event_venues = []
 
+    // Gets all events with the user id of the current user
     $http.get(`http://localhost:8000/tickets/${current_user_id}`)
         .then((res) => $scope.user_events = res.data)
 
+    // Gets all venues
     $http.get('http://localhost:8000/tickets/venues')
         .then((res) => $scope.event_venues = res.data)
 

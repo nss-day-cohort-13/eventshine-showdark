@@ -9,14 +9,22 @@
 </head>
 <body>
   <div class="wrapper">
-    <h1>User Logged in</h1>
-    <!-- <div ng-app="app">
+    <!-- <h1>User Logged in</h1> -->
+    <div ng-app="app">
       <div ng-view>
       </div>
-    </div> -->
+    </div>
+    <a href="{% url 'tickets:logout' %}">Log out</a>
   </div>
-    <!-- <script src="{% static 'path/to/angular.js' %}"></script>
-    <script src="{% static 'path/to/.js' %}"></script>
-    <script src="{% static 'path/to/.js' %}"></script> -->
+    <script src="{% static 'bower_components/angular/angular.min.js' %}"></script>
+    <script src="{% static 'bower_components/angular-route/angular-route.min.js' %}"></script>
+	<script src="{% static 'app/app.js' %}"></script>
+    <script src="{% static 'app/app_config.js' %}"></script>
+    <script src="{% static 'app/controllers/all_events.js' %}"></script>
+    <script src="{% static 'app/controllers/create_event.js' %}"></script>
+    <script src="{% static 'app/controllers/login.js' %}"></script>
+    <script src="{% static 'app/controllers/nav_bar.js' %}"></script>
+    <script src="{% static 'app/controllers/single_event.js' %}"></script>
+    <script src="{% static 'app/controllers/user_events.js' %}"></script>
 </body>
 </html>
