@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 from django.contrib.auth.models import User, Permission
 from django.http import HttpResponse, HttpResponseRedirect
+=======
+from django.shortcuts import get_list_or_404, get_object_or_404, render
+>>>>>>> d7e0af18a219fc5fd4cc22a6da368144397a4eb0
 from django.urls import reverse
 from django.views import generic
 from django.core import serializers
@@ -110,6 +114,7 @@ class Profile(generic.TemplateView):
 
 
 def get_users_events(request, user_id):
+<<<<<<< HEAD
 
     user = get_object_or_404(User, pk=user_id)
     user_events = get_object_or_404(UserEvent, userId=user.id)
@@ -130,9 +135,32 @@ def get_users_events(request, user_id):
 
 def get_all_venues(request):
 
+=======
+    user = get_object_or_404(User, pk=user_id)
+    user_events = get_list_or_404(UserEvent, userId=user.id)
+    print(user_events)
+    data = []
+    try:
+        for e in user_events:
+            event = Event.objects.get(pk=e.eventId.id)
+            data.append(event)
+    except TypeError:
+        event = Event.objects.get(pk=user_events.eventId.id)
+        data.append(event)
+
+    outgoing_data = serializers.serialize("json", data)
+
+    return HttpResponse(outgoing_data, content_type="application/json")
+
+def get_all_venues(request):
+>>>>>>> d7e0af18a219fc5fd4cc22a6da368144397a4eb0
     try:
         venues = Venue.objects.all()
         data = serializers.serialize("json", venues)
         return HttpResponse(data, content_type="application/json")
     except:
+<<<<<<< HEAD
         return "No venues registered"
+=======
+        return HttpResponse("No venues registered")
+>>>>>>> d7e0af18a219fc5fd4cc22a6da368144397a4eb0
