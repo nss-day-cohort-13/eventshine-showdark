@@ -1,3 +1,9 @@
+<!-- The form action routes to the url that will recieve the post method.-->
+<!-- The input "name" field is used to pass variables using the same name to the reciving method
+and they are accessed by the request passed into said method. -->
+<!-- In this case, the loginUser function defined in views.py is getting the "userName" variable as 
+"request.POST['userName']" etc -->
+
 <form action="../loginUser/" method="post" accept-charset="utf-8">{% csrf_token %}
 
 	User name:<br>

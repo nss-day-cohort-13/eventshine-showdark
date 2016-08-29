@@ -136,12 +136,12 @@ def get_users_events(request, user_id):
     return HttpResponse(outgoing_data, content_type="application/json")
 
 def get_all_venues(request):
+
     """
     Gets all registered venues
 
     Args- request object
     """
-
     try:
         venues = Venue.objects.all()
         data = serializers.serialize("json", venues)
@@ -181,3 +181,24 @@ def create_event(request):
     new_event.venue_set.create(pk=event_venue.id)
 
     return HttpResponse("Create successful!")
+
+def register_for_event(request):
+    """
+    Registers logged-in user for selected event
+
+    Args- request object (via POST, comes in as JSON)
+    """
+
+    # still need to parse JSON coming in
+    user_id = request.POST['user_id']
+    event_id = request.POST['event_id']
+    event = Event.objects.get(pk=event_id)
+    venue = Venue.objects.get(pk=event.venueId.id)
+    registered_event = UserEvent.objects.create(userId=user_id, eventId=event_id)
+    event.tickets_sold += 1
+    event.save()
+    if event.tickets_sold == venue.capacity:
+        event.full = 1
+        event.save()
+    return HttpResponse("Registration Successful")
+
