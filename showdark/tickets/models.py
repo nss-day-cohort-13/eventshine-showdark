@@ -24,6 +24,9 @@ class Event(models.Model):
     city = models.CharField(max_length=20)
     beginTime = models.DateTimeField('Start Time')
     endTime = models.DateTimeField('End Time')
+    full = models.IntegerField(default=0)
+    tickets_sold = models.IntegerField(default=0)
+
 
     def __str__(self):
         return self.name

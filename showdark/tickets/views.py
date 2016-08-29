@@ -131,7 +131,6 @@ def get_users_events(request, user_id):
 
 
 def get_all_venues(request):
-
     user = get_object_or_404(User, pk=user_id)
     user_events = get_list_or_404(UserEvent, userId=user.id)
     print(user_events)
@@ -149,11 +148,14 @@ def get_all_venues(request):
     return HttpResponse(outgoing_data, content_type="application/json")
 
 
-def get_all_venues(request):
-
-    try:
-        venues = Venue.objects.all()
-        data = serializers.serialize("json", venues)
-        return HttpResponse(data, content_type="application/json")
-    except:
-        return HttpResponse("No venues registered")
+def register_for_event(request, user_id, event_id):
+    user = User.objects.get(pk=user_id)
+    event = Event.objects.get(pk=event_id)
+    venue = Venue.objects.get(pk=event.venueId.id)
+    registered_event = UserEvent.objects.create(userId=user, eventId=event)
+    event.tickets_sold += 1
+    event.save()
+    if event.tickets_sold == venue.capacity:
+        event.full = 1
+        event.save()
+    return HttpResponse("Registration Successful")

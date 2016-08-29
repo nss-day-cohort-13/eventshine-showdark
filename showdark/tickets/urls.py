@@ -5,6 +5,7 @@ from . import views
 app_name = 'tickets'
 urlpatterns = [
 
+
     url(r'^login/', views.Login.as_view(), name='login'),
     url(r'^logout/', views.logoutUser, name='logout'),
     url(r'^loginUser/', views.loginUser, name='loginUser'),
@@ -19,5 +20,5 @@ urlpatterns = [
     url(r'^profile', views.Profile.as_view(), name='profile'),
     url(r'^(?P<user_id>[0-9]+)/$', views.get_users_events, name='user_events'),
     url(r'^venues', views.get_all_venues, name='venues'),
-
+	url(r'^(?P<user_id>\d+)/(?P<event_id>\d+)$', views.register_for_event, name='event_registration'),
 ]
