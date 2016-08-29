@@ -4,10 +4,13 @@ from . import views
 
 app_name = 'tickets'
 urlpatterns = [
-    url(r'^login/', views.Login.as_view(), name="login"),
-    url(r'^loginUser/', views.loginUser, name="loginUser"),
-    url(r'^register/', views.Register.as_view(), name="register"),
-    url(r'^registerUser/', views.registerUser, name="registerUser"),
+
+
+    url(r'^login/', views.Login.as_view(), name='login'),
+    url(r'^logout/', views.logoutUser, name='logout'),
+    url(r'^loginUser/', views.loginUser, name='loginUser'),
+    url(r'^register/', views.Register.as_view(), name='register'),
+    url(r'^registerUser/', views.registerUser, name='registerUser'),
     url(r'^failedLogin/', views.FailedLogin.as_view(), name='failedLogin'),
     url(r'^$', views.index, name='index'),
     #
