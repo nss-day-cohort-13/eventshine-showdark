@@ -99,6 +99,8 @@ def logoutUser(request):
     '''
     logout(request)
     # Redirect to success page
+    return HttpResponseRedirect('/tickets/login')
+
 
 
 def index(request):
