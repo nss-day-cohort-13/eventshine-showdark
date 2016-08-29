@@ -148,11 +148,12 @@ def get_all_venues(request):
     return HttpResponse(outgoing_data, content_type="application/json")
 
 
-def register_for_event(request, user_id, event_id):
-    user = User.objects.get(pk=user_id)
+def register_for_event(request):
+    user_id = request.POST['user_id']
+    event_id = request.POST['event_id']
     event = Event.objects.get(pk=event_id)
     venue = Venue.objects.get(pk=event.venueId.id)
-    registered_event = UserEvent.objects.create(userId=user, eventId=event)
+    registered_event = UserEvent.objects.create(userId=user_id, eventId=event_id)
     event.tickets_sold += 1
     event.save()
     if event.tickets_sold == venue.capacity:
