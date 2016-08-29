@@ -1,6 +1,6 @@
 app.controller("CreateEventCtrl", function ($scope, $http) {
 
-    $scope.title = "Create and event!"
+    $scope.title = "Create an event!"
     $scope.venues = []
 
     $http.get("localhost:8000/tickets/venues")
