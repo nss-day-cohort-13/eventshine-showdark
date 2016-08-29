@@ -36,4 +36,14 @@ def get_all_venues(request):
 	except:
 		return "No venues registered"
 
-
+def register_for_event(request, user_id, event_id):
+    user = User.objects.get(pk=user_id)
+    event = Event.objects.get(pk=event_id)
+    venue = Venue.objects.get(pk=event.venueId.id)
+    registered_event = UserEvent.objects.create(userId=user, eventId=event)
+    event.tickets_sold += 1
+    event.save()
+    if event.tickets_sold == venue.capacity:
+        event.full = 1
+        event.save()
+    return HttpResponse("Registration Successful")
