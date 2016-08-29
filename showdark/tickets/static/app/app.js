@@ -4,7 +4,7 @@ var app = angular
         $interpolateProvider.startSymbol('((');
         $interpolateProvider.endSymbol('))');},
         
-        ['$httpProvider', function($httpProvider) {
+        ['$httpProvider', function($httpProvider) { // This was suggested by an article to fix csrf errors
             $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         	$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     }]);
