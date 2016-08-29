@@ -1,10 +1,9 @@
-
+from django.contrib.auth.models import User, Permission
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.core import serializers
 from django.shortcuts import get_object_or_404, render
-from django.contrib.auth.models import Permission, User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .models import *
@@ -74,7 +73,7 @@ def registerUser(request):
     email = request.POST['email']
 
     user = User.objects.create_user(username=userName, password=passWord, first_name=firstName,
-            last_name=lastName, email=email)
+                                    last_name=lastName, email=email)
 
     # Permissions
     # Add
