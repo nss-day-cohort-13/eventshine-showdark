@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^(?P<user_id>[0-9]+)/$', views.get_users_events, name='user_events'),
 	# get request for all venues
     url(r'^venues', views.get_all_venues, name='venues'),
+    url(r'^create_event', views.create_event, name='create_event'),
 	# post request to register for an event
 	url(r'^event_registration', views.register_for_event, name='event_registration'),
-
 ]

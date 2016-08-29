@@ -1,29 +1,25 @@
+<!--
+	-create event function not tied to any user
+	-"action" attr redirects user to specified url
+	-"method" attr sends specified HTTP call with contents of form (as long as button is type="submit")
+-->
+
 <section ng-controller="CreateEventCtrl as createCtrl">
-	<div class="form-group">
+	<form action="../create_event" method="post" class="form-group">
 		<label>Name of event:</label>
-		<input class="form-control" type="text" name="eventName" ng-model="createCtrl.eventName">
+		<input class="form-control" type="text" name="eventName">
 		<label>Description:</label>
-		<input class="form-control" type="text" name="description" ng-model="createCtrl.description">
+		<input class="form-control" type="text" name="description">
 		<label>City:</label>
-		<input class="form-control" type="text" name="city" ng-model="createCtrl.city">
+		<input class="form-control" type="text" name="city">
 		<label>Start date and time:</label>
-		<div class="input-group date">
-			<input type="text" class="form-control" ng-model="createCtrl.start"/>
-			<span class="input-group-addon">
-				<span class="glyphicon glyphicon-calendar"></span>
-			</span>
-		</div>
+		<input type="datetime-local" name="startDate">
 		<label>End date and time:</label>
-		<div class="input-group date">
-			<input type="text" class="form-control" ng-model="createCtrl.end"/>
-			<span class="input-group-addon">
-				<span class="glyphicon glyphicon-calendar"></span>
-			</span>
-		</div>
+		<input type="datetime-local" name="endDate">
 		<label>Choose a venue:</label>
 		<select>
-			<option ng-repeat="venue in venues" ng-model="venue">((venue.fields.name))</option>
+			<option ng-repeat="venue in venues">((venue.fields.name))</option>
 		</select>
-		<button class="btn btn-success" type="submit" ng-submit="create_events()">Create event</button>
-	</div>
+		<button class="btn btn-success" type="submit"">Create event</button>
+	</form>
 </section>
