@@ -10,6 +10,9 @@ class User(models.Model):
     eMail = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.firstName + " " + self.lastName
+
 class Venue(models.Model):
 
     name = models.CharField(max_length=200)
@@ -19,6 +22,9 @@ class Venue(models.Model):
     zipCode = models.IntegerField(default=0)
     capacity = models.IntegerField(default=0)
     contact = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
 
 
 class Event(models.Model):
@@ -30,7 +36,11 @@ class Event(models.Model):
     beginTime = models.DateTimeField('Start Time')
     endTime = models.DateTimeField('End Time')
 
+
+    def __str__(self):
+        return self.name
+
 class UserEvent(models.Model):
 
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
-    eventID = models.ForeignKey(Event, on_delete=models.CASCADE)
+    eventId = models.ForeignKey(Event, on_delete=models.CASCADE)
