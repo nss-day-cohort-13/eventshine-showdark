@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
@@ -32,7 +31,7 @@ def get_users_events(request, user_id):
 def get_all_venues(request):
 	try:
 		venues = Venue.objects.all()
-		data = serializers.serialize("json", data)
+		data = serializers.serialize("json", venues)
 		return HttpResponse(data, content_type="application/json")
 	except:
 		return "No venues registered"
