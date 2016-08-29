@@ -4,40 +4,66 @@ from django.contrib.auth.models import Permission
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
-# from django.urls import reverse
+from django.urls import reverse
 from django.views import generic
 
 # Create your views here.
 
 
 class Register(generic.TemplateView):
-    template_name = 'register.html'
+    '''
+    Handles showing the login page
+    '''
+    template_name = 'tickets/register.html'
 
 
 class Login(generic.TemplateView):
-    template_name = 'login.html'
+    '''
+    Handles showing the login page
+    '''
+    template_name = 'tickets/login.html'
 
 
-def loginUser(self, request):
+class FailedLogin(generic.TemplateView):
+    '''
+    Handles showing error page for failed logins
+    '''
+    template_name = 'tickets/failedLogin.html'
+
+
+def loginUser(request):
     '''
     Login module for users
     '''
-    userName = input("Enter your username")
-    passWord = input("Enter your password")
-
-    auth = self.authenticateUser(userName, passWord)  # returns a user object if user is authenticated
+    userName = request.POST['userName']
+    passWord = request.POST['passWord']
+    auth = authenticate(username=userName, password=passWord)
 
     if auth:
-        login(request, user)
-        # Redirect to a success page
+        try:
+            user = authenticateUser(request, userName, passWord)  # returns a user object if user is authenticated
+            login(request, user)
+            return render(request, 'tickets/profile.html')
+        except:  # I dont know what the exception would be if the user authentication works but the login doesn't
+            return HttpResponseRedirect('../failedLogin/')
     else:
-        pass
-        # Return an invalid login error message
+        return HttpResponseRedirect('../failedLogin/')
+
+
+def authenticateUser(request, userName, passWord):
+    '''
+    Authentication module for users. Takes a user name and password (strings) for arguments.
+    Returns a user object if authentication is successful
+    '''
+    user = authenticate(username=userName, password=passWord)
+
+    if user is not None:
+        return user
+    else:
+        return False
 
 
 def registerUser(request):
-# class registerUser(generic.TemplateView):
-
     '''
     Registration module for new users
     '''
@@ -66,19 +92,6 @@ def registerUser(request):
 
     user.save()
     return HttpResponseRedirect('/tickets/profile')
-
-
-def authenticateUser(self, userName, passWord):
-    '''
-    Authentication module for users. Takes a user name and password (strings) for arguments.
-    Returns a user object if authentication is successful
-    '''
-    user = authenticate(username=userName, password=passWord)
-
-    if user is not None:
-        return user
-    else:
-        return False
 
 
 def logoutUser(request):
