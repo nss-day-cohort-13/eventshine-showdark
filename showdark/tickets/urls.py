@@ -14,8 +14,11 @@ urlpatterns = [
 	# request.POST to send user data to register
     url(r'^registerUser/', views.registerUser, name='registerUser'),
     url(r'^failedLogin/', views.FailedLogin.as_view(), name='failedLogin'),
+
 	# currently just a string being returned for index
 	url(r'^$', views.index, name='index'),
+
+    # url(r'^event/?P<tickets_event.id>[0-9]+)/$')
 	# url that appears if login is succesful
     url(r'^profile', views.Profile.as_view(), name='profile'),
 	# get request url for user events
@@ -24,4 +27,5 @@ urlpatterns = [
     url(r'^venues', views.get_all_venues, name='venues'),
 	# post request to register for an event
 	url(r'^event_registration', views.register_for_event, name='event_registration'),
+
 ]
