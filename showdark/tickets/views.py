@@ -7,6 +7,7 @@ from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .models import *
+from utilities import UtilityConfig
 
 
 class Register(generic.TemplateView):
@@ -112,6 +113,11 @@ class Profile(generic.TemplateView):
 
 
 def get_users_events(request, user_id):
+    """
+    Gets all events logged-in user has registered for
+
+    Args- request object, logged-in user's id
+    """
 
     user = get_object_or_404(User, pk=user_id)
     user_events = get_object_or_404(UserEvent, userId=user.id)
@@ -129,27 +135,12 @@ def get_users_events(request, user_id):
 
     return HttpResponse(outgoing_data, content_type="application/json")
 
-
 def get_all_venues(request):
+    """
+    Gets all registered venues
 
-    user = get_object_or_404(User, pk=user_id)
-    user_events = get_list_or_404(UserEvent, userId=user.id)
-    print(user_events)
-    data = []
-    try:
-        for e in user_events:
-            event = Event.objects.get(pk=e.eventId.id)
-            data.append(event)
-    except TypeError:
-        event = Event.objects.get(pk=user_events.eventId.id)
-        data.append(event)
-
-    outgoing_data = serializers.serialize("json", data)
-
-    return HttpResponse(outgoing_data, content_type="application/json")
-
-
-def get_all_venues(request):
+    Args- request object
+    """
 
     try:
         venues = Venue.objects.all()
@@ -157,3 +148,36 @@ def get_all_venues(request):
         return HttpResponse(data, content_type="application/json")
     except:
         return HttpResponse("No venues registered")
+
+def create_event(request):
+    """
+    Creates a new event based on form input from partials/create_event.html UNTESTED
+
+    Args- request object
+    """
+
+    # info from create_event.html form; comes in on response object argument
+    eventName = request.POST["eventName"]
+    description = request.POST["description"]
+    city = request.POST["city"]
+    startDate = request.POST["startDate"]
+    endDate = request.POST["endDate"]
+    venue = request.POST["venue"]
+
+    # convert HTML5 datetime-local to python datetime.datetime per Event begin/endTime model requirements
+    beginTime = convert_html_datetime_to_python_datetime(startDate)
+    endTime = convert_html_datetime_to_python_datetime(endDate)
+
+    event_venue = get_object_or_404(Venue, pk=venue.pk)
+
+    new_event = Event.objects.create(
+        name=eventName,
+        description=description,
+        city=city,
+        beginTime=datetime.datetime(beginTime),
+        endTime=datetime.datetime(endTime)
+    )
+
+    new_event.venue_set.create(pk=event_venue.id)
+
+    return HttpResponse("Create successful!")

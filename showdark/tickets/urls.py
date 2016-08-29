@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^profile', views.Profile.as_view(), name='profile'),
     url(r'^(?P<user_id>[0-9]+)/$', views.get_users_events, name='user_events'),
     url(r'^venues', views.get_all_venues, name='venues'),
+    url(r'^create_event', views.create_event, name='create_event'),
 
 ]
