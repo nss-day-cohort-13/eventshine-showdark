@@ -1,6 +1,4 @@
-<form action="../registerUser/" method="post" accept-charset="utf-8">{% csrf_token %}
-<!-- 	register/
-	get -->
+<form action="{% url 'tickets:registerUser' %}" method="post" accept-charset="utf-8">{% csrf_token %}
 
 	First name:<br>
 	<input name="firstName" type="text"><br>
@@ -14,3 +12,5 @@
 	<input name="email" type="text"><br>
 	<button type="submit">Submit</button>
 </form>
+
+<p><a href="{% url 'tickets:login' %}">Return to homepage</a>.</p>

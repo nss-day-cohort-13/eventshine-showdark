@@ -10,18 +10,18 @@ from .models import *
 from .utilities import *
 
 
+class Login(generic.TemplateView):
+    '''
+    Handles showing the login page
+    '''
+    template_name = 'tickets/index.html'
+
+
 class Register(generic.TemplateView):
     '''
     Handles showing the login page
     '''
     template_name = 'tickets/register.html'
-
-
-class Login(generic.TemplateView):
-    '''
-    Handles showing the login page
-    '''
-    template_name = 'tickets/login.html'
 
 
 class FailedLogin(generic.TemplateView):
@@ -100,8 +100,7 @@ def logoutUser(request):
     '''
     logout(request)
     # Redirect to success page
-    return HttpResponseRedirect('/tickets/login')
-
+    return HttpResponseRedirect('/tickets/')
 
 
 def index(request):
@@ -135,6 +134,7 @@ def get_users_events(request, user_id):
 
     return HttpResponse(outgoing_data, content_type="application/json")
 
+
 def get_all_venues(request):
 
     """
@@ -148,6 +148,7 @@ def get_all_venues(request):
         return HttpResponse(data, content_type="application/json")
     except:
         return HttpResponse("No venues registered")
+
 
 def create_event(request):
     """
@@ -181,6 +182,7 @@ def create_event(request):
     new_event.venue_set.create(pk=event_venue.id)
 
     return HttpResponse("Create successful!")
+
 
 def register_for_event(request):
     """

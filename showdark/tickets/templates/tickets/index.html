@@ -4,7 +4,7 @@ and they are accessed by the request passed into said method. -->
 <!-- In this case, the loginUser function defined in views.py is getting the "userName" variable as 
 "request.POST['userName']" etc -->
 
-<form action="../loginUser/" method="post" accept-charset="utf-8">{% csrf_token %}
+<form action="{% url 'tickets:loginUser' %}" method="post" accept-charset="utf-8">{% csrf_token %}
 
 	User name:<br>
 	<input name="userName" type="text"><br>
@@ -12,3 +12,4 @@ and they are accessed by the request passed into said method. -->
 	<input name="passWord" type="text"><br>
 	<button type="submit">Submit</button>
 </form>
+<p>Don't have an account? <a href="{% url 'tickets:register' %}">Create one here</a>.</p>
