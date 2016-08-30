@@ -1,9 +1,6 @@
 angular.module('app').controller("AllEventsCtrl", function ($scope, $http, $location){
 
     $scope.title = "Events"
-    $scope.current_user = // figure out how to get the current user
-
-    $scope.events = []
 
     $http.get(`http://localhost:8000/tickets/get_user/`)
       .then(function success (res){
