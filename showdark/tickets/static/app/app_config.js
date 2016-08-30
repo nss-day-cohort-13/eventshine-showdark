@@ -1,12 +1,11 @@
-app
-    // Takes out the # in the url
+angular.module('app').config(function($routeProvider) {   // Takes out the # in the url
     // .config(function($locationProvider) {
     //     $locationProvider.html5Mode(true);
     // });
-    .config(['$routeProvider', function($routeProvider) {
+
         $routeProvider
-            .when('/myEvents', {
-                templateUrl: 'static/app/partials/user_events.html',
+            .when('/', {
+                templateUrl: 'partials/user_events.html',
                 controller: 'UserEventsCtrl',
                 // controllerAs: 'userEvents'
             })
@@ -16,4 +15,4 @@ app
                 // controllerAs: 'allEvents'
             })
         // Still needs the rest of the routes
-    }])
+    })

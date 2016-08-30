@@ -1,4 +1,4 @@
-app.controller("CreateEventCtrl", function ($scope, $http) {
+angular.module('app').controller("CreateEventCtrl", function ($scope, $http) {
 
     $scope.title = "Create an event!"
     $scope.venues = []
