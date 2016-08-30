@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .models import *
 from .utilities import *
+import json
 
 
 class Login(generic.TemplateView):
@@ -48,6 +49,10 @@ def loginUser(request):
             return HttpResponseRedirect('../failedLogin/')
     else:
         return HttpResponseRedirect('../failedLogin/')
+
+def get_current_user(request):
+    user = serializers.serialize("json", [request.user,])
+    return HttpResponse(user, content_type="application/json")
 
 
 def authenticateUser(request, userName, passWord):
