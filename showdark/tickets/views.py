@@ -7,7 +7,7 @@ from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .models import *
-from utilities import UtilityConfig
+from .utilities import *
 
 
 class Register(generic.TemplateView):
@@ -174,8 +174,8 @@ def create_event(request):
         name=eventName,
         description=description,
         city=city,
-        beginTime=datetime.datetime(beginTime),
-        endTime=datetime.datetime(endTime)
+        beginTime=beginTime,
+        endTime=endTime
     )
 
     new_event.venue_set.create(pk=event_venue.id)
