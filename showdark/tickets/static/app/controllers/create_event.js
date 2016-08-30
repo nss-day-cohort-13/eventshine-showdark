@@ -17,7 +17,7 @@ angular.module('app').controller("CreateEventCtrl", function ($scope, $http) {
     		venue: $scope.venue
     	})
     	.then((res) => {
-    		console.log("POSTED!");
+    		console.log("POSTED!", res.data);
     	})
     }
 })

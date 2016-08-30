@@ -14,5 +14,8 @@ angular.module('app').config(function($routeProvider) {   // Takes out the # in 
                 controller: 'AllEventsCtrl',
                 // controllerAs: 'allEvents'
             })
-        // Still needs the rest of the routes
+            .when('/createEvent', {
+                templateUrl: '/static/app/partials/create_event.html',
+                controller: 'CreateEventCtrl',
+                // controllerAs: 'createEvent'
     })
