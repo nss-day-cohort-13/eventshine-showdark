@@ -1,7 +1,7 @@
 "use strict";
 
 	// NOT YET IMPLEMENTED !!!!
-app.controller("SingleEventCtrl", function ($scope, $http, $routeParams) {
+angular.module('app').controller("SingleEventCtrl", function ($scope, $http, $routeParams) {
 	$scope.title = "Events";
 	$scope.current_user = // figure out how to get the current user
 

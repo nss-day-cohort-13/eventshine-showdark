@@ -1,4 +1,4 @@
-app.controller("UserEventsCtrl", function ($scope, $http){
+angular.module('app').controller("UserEventsCtrl", function ($scope, $http){
 
     $scope.title = "My Events"
     let current_user_id = // figure out how to get the current user
