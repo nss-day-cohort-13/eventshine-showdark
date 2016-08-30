@@ -5,12 +5,12 @@ angular.module('app').config(function($routeProvider) {   // Takes out the # in 
 
         $routeProvider
             .when('/', {
-                templateUrl: 'partials/user_events.html',
+                templateUrl: '/static/app/partials/user_events.html',
                 controller: 'UserEventsCtrl',
                 // controllerAs: 'userEvents'
             })
             .when('/allEvents', {
-                templateUrl: 'static/app/partials/all_events.html',
+                templateUrl: '/static/app/partials/all_events.html',
                 controller: 'AllEventsCtrl',
                 // controllerAs: 'allEvents'
             })
