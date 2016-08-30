@@ -9,18 +9,18 @@ from django.contrib.auth import authenticate, login, logout
 from .models import *
 
 
+class Login(generic.TemplateView):
+    '''
+    Handles showing the login page
+    '''
+    template_name = 'tickets/index.html'
+
+
 class Register(generic.TemplateView):
     '''
     Handles showing the login page
     '''
     template_name = 'tickets/register.html'
-
-
-class Login(generic.TemplateView):
-    '''
-    Handles showing the login page
-    '''
-    template_name = 'tickets/login.html'
 
 
 class FailedLogin(generic.TemplateView):
