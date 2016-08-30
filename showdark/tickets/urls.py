@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^create_event', views.create_event, name='create_event'),
     # post request to register for an event
     url(r'^event_registration', views.register_for_event, name='event_registration'),
+    url(r'^events', views.get_all_events, name="get_all_events"),
 ]

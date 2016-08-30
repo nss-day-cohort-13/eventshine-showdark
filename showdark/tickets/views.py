@@ -149,6 +149,14 @@ def get_all_venues(request):
     except:
         return HttpResponse("No venues registered")
 
+def get_all_events(request):
+    """
+    Returns json data of all events
+    """
+    events = Event.objects.all()
+    data = serializers.serialize("json", events)
+    return HttpResponse(data, content_type="application/json")
+
 
 def create_event(request):
     """
@@ -203,4 +211,3 @@ def register_for_event(request):
         event.full = 1
         event.save()
     return HttpResponse("Registration Successful")
-
