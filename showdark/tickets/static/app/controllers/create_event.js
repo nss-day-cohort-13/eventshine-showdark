@@ -7,6 +7,7 @@ angular.module('app').controller("CreateEventCtrl", function ($scope, $http, $lo
     $http.get("http://localhost:8000/tickets/venues")
         .then((res) => $scope.venues = res.data)
 
+
     $scope.create_event = function () {
     	$http({
     		url: "http://localhost:8000/tickets/create_event",
@@ -23,5 +24,13 @@ angular.module('app').controller("CreateEventCtrl", function ($scope, $http, $lo
     	.then((res) => {
     		$location.path("/allEvents")
     	})
+    }
+
+    $scope.backToProfile = () => {
+      $location.path('/');
+    }
+
+    $scope.allEvents = () => {
+      $location.path('/allEvents');
     }
 })

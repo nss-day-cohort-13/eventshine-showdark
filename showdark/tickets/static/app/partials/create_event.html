@@ -4,6 +4,10 @@
 	-"method" attr sends specified HTTP call with contents of form (as long as button is type="submit")
 -->
 
+<nav>
+  <button type="button" ng-click="allEvents()">View All Events</button>
+	<button type="button" name="button" ng-click="backToProfile()">Profile Page</button>
+</nav>
 <section ng-controller="CreateEventCtrl as createCtrl">
 	<form class="form-group">
 		<label>Name of event:</label>

@@ -1,8 +1,10 @@
 <!-- This has not been tested yet. It should show all events that the user is
 registered for-->
-
-<section ng-controller="UserEventsCtrl">
-    <button type="button" ng-click="allEvents()">View All Events</button>
+<nav>
+  <button type="button" ng-click="allEvents()">View All Events</button>
+  <button type="button" name="button"ng-click="createEventPage()">Create Event</button>
+</nav>
+<section>
     <h1>((title))</h1>
     <div>
         <div ng-repeat="event in user_events">
@@ -25,6 +27,5 @@ registered for-->
             <!-- <button ng-click="delete_event(event)">Cancel Order</button> -->
             </div>
         </div>
-        <button type="button" ng-click="create_event()">Create new event</button>
     </div>
-</section>
+<!-- </section> -->
