@@ -98,7 +98,7 @@ def registerUser(request):
     user.has_perm('tickets.delete_UserEvent')
 
     user.save()
-    return HttpResponseRedirect('/tickets/profile')
+    return HttpResponseRedirect('/tickets')
 
 
 def logoutUser(request):
