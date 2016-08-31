@@ -6,6 +6,7 @@ from django.views import generic
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from .models import *
 from .utilities import *
 import json
@@ -33,10 +34,12 @@ class FailedLogin(generic.TemplateView):
     template_name = 'tickets/failedLogin.html'
 
 
+@csrf_exempt
 def loginUser(request):
     '''
     Login module for users
     '''
+    print("~~USER~~")
     userName = request.POST['userName']
     passWord = request.POST['passWord']
     auth = authenticate(username=userName, password=passWord)
@@ -51,8 +54,9 @@ def loginUser(request):
     else:
         return HttpResponseRedirect('../failedLogin/')
 
+
 def get_current_user(request):
-    user = serializers.serialize("json", [request.user,])
+    user = serializers.serialize("json", [request.user, ])
     return HttpResponse(user, content_type="application/json")
 
 
@@ -114,6 +118,7 @@ def index(request):
 
 
 class Profile(generic.TemplateView):
+
     template_name = 'tickets/profile.html'
 
 
@@ -154,6 +159,7 @@ def get_all_venues(request):
     except:
         return HttpResponse("No venues registered")
 
+
 def get_all_events(request):
     """
     Returns json data of all events
@@ -171,30 +177,30 @@ def create_event(request):
     """
 
     # info from create_event.html form; comes in on response object argument
-    eventName = request.POST["eventName"]
-    description = request.POST["description"]
-    city = request.POST["city"]
-    startDate = request.POST["startDate"]
-    endDate = request.POST["endDate"]
-    venue = request.POST["venue"]
+    data = request.body.decode("utf-8")
+    data2 = json.loads(data)
 
-    # convert HTML5 datetime-local to python datetime.datetime per Event begin/endTime model requirements
-    beginTime = convert_html_datetime_to_python_datetime(startDate)
-    endTime = convert_html_datetime_to_python_datetime(endDate)
+    eventName = data2["eventName"]
+    description = data2["description"]
+    city = data2["city"]
+    beginTime = data2["beginTime"]
+    endTime = data2["endTime"]
+    venueId = data2["venue"]
 
-    event_venue = get_object_or_404(Venue, pk=venue.pk)
+    event_venue = get_object_or_404(Venue, pk=venueId)
 
     new_event = Event.objects.create(
         name=eventName,
         description=description,
         city=city,
         beginTime=beginTime,
-        endTime=endTime
+        endTime=endTime,
+        venueId=event_venue
     )
 
-    new_event.venue_set.create(pk=event_venue.id)
+    new_event.save()
 
-    return HttpResponse("Create successful!")
+    return HttpResponse("Event created")
 
 
 def register_for_event(request):
