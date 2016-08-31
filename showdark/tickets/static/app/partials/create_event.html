@@ -13,12 +13,12 @@
 		<label>City:</label>
 		<input class="form-control" type="text" name="city" ng-model="city">
 		<label>Start date and time:</label>
-		<input type="datetime" name="beginTime" ng-model="beginTime">
+		<input type="datetime-local" name="beginTime" ng-model="beginTime">
 		<label>End date and time:</label>
-		<input type="datetime" name="endTime" ng-model="endTime">
+		<input type="datetime-local" name="endTime" ng-model="endTime">
 		<label>Choose a venue:</label>
 		<select ng-model="venue">
-			<option ng-repeat="venue in venues">((venue))</option>
+			<option ng-repeat="venue in venues" ng-value="venue.pk">((venue.fields.name))</option>
 		</select>
 		<button class="btn btn-success" type="submit" ng-click="create_event()">Create event</button>
 	</form>
