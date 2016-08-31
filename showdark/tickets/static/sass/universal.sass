@@ -13,11 +13,12 @@
 	display: flex
 	flex-flow: row wrap
 	justify-content: space-between
-	border: 1px solid black
-	border-radius: 3px
-	margin: 10px 0
+	@include card-borders
 	h3
 		margin-top: 10px
+		width: 100%
+		padding-bottom: 5px
+		border-bottom: 1px solid grey
 
 .event-info-right
 	justify-content: flex-end
@@ -33,4 +34,4 @@
 	font-weight: bold
 
 .register-button
-
+	width: 100%

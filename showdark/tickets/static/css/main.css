@@ -14,9 +14,12 @@
   justify-content: space-between;
   border: 1px solid black;
   border-radius: 3px;
-  margin: 10px 0; }
+  margin: 20px 0; }
   .event-card h3 {
-    margin-top: 10px; }
+    margin-top: 10px;
+    width: 100%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid grey; }
 
 .event-info-right {
   justify-content: flex-end;
@@ -30,6 +33,9 @@
 
 .info-label {
   font-weight: bold; }
+
+.register-button {
+  width: 100%; }
 
 .landing {
   width: 90%;
@@ -50,3 +56,28 @@
 
 .events-button {
   width: 45%; }
+
+.my-event-card {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin: 20px 0; }
+  .my-event-card h3 {
+    width: 100%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid grey; }
+
+.my-event-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 10px; }
+
+.my-event-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 10px 10px 10px 0; }
