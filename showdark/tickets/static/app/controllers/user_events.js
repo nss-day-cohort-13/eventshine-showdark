@@ -1,5 +1,6 @@
 angular.module('app').controller("UserEventsCtrl", function ($scope, $http, $timeout, $location){
 
+
     $scope.title = "My Events"
     $http.get(`http://localhost:8000/tickets/get_user/`)
       .then(function success (res){
@@ -17,6 +18,10 @@ angular.module('app').controller("UserEventsCtrl", function ($scope, $http, $tim
     // Gets all venues
     $http.get('http://localhost:8000/tickets/venues')
         .then((res) => $scope.event_venues = res.data);
+
+    $scope.create_event = function () {
+        $location.path("/createEvent")
+    }
 
     // $scope.delete_event = () => {
     //     $http.delete(`http://localhost:8000/tickets/${current_user_id}`)
