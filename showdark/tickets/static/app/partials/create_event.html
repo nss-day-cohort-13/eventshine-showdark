@@ -5,21 +5,21 @@
 -->
 
 <section ng-controller="CreateEventCtrl as createCtrl">
-	<form action="../create_event" method="post" class="form-group">
+	<form class="form-group">
 		<label>Name of event:</label>
-		<input class="form-control" type="text" name="eventName">
+		<input class="form-control" type="text" name="eventName" ng-model="eventName">
 		<label>Description:</label>
-		<input class="form-control" type="text" name="description">
+		<input class="form-control" type="text" name="description" ng-model="description">
 		<label>City:</label>
-		<input class="form-control" type="text" name="city">
+		<input class="form-control" type="text" name="city" ng-model="city">
 		<label>Start date and time:</label>
-		<input type="datetime-local" name="startDate">
+		<input type="datetime-local" name="beginTime" ng-model="beginTime">
 		<label>End date and time:</label>
-		<input type="datetime-local" name="endDate">
+		<input type="datetime-local" name="endTime" ng-model="endTime">
 		<label>Choose a venue:</label>
-		<select>
-			<option ng-repeat="venue in venues">((venue.fields.name))</option>
+		<select ng-model="venue">
+			<option ng-repeat="venue in venues" ng-value="venue.pk">((venue.fields.name))</option>
 		</select>
-		<button class="btn btn-success" type="submit"">Create event</button>
+		<button class="btn btn-success" type="submit" ng-click="create_event()">Create event</button>
 	</form>
 </section>

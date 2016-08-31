@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import *
 from .utilities import *
 import json
+import ast
 
 
 class Login(generic.TemplateView):
@@ -36,6 +37,7 @@ def loginUser(request):
     '''
     Login module for users
     '''
+    print("~~USER~~")
     userName = request.POST['userName']
     passWord = request.POST['passWord']
     auth = authenticate(username=userName, password=passWord)
@@ -96,7 +98,7 @@ def registerUser(request):
     user.has_perm('tickets.delete_UserEvent')
 
     user.save()
-    return HttpResponseRedirect('/tickets/profile')
+    return HttpResponseRedirect('/tickets')
 
 
 def logoutUser(request):
@@ -124,12 +126,11 @@ def get_users_events(request, user_id):
     """
 
     user = get_object_or_404(User, pk=user_id)
-    user_events = get_object_or_404(UserEvent, userId=user.id)
-    print(user_events)
+    user_events = get_list_or_404(UserEvent, userId=user.id)
     data = []
     try:
         for e in user_events:
-            event = Event.objects.get(pk=e.eventId)
+            event = Event.objects.get(pk=e.eventId.id)
             data.append(event)
     except TypeError:
         event = Event.objects.get(pk=user_events.eventId.id)
@@ -171,30 +172,30 @@ def create_event(request):
     """
 
     # info from create_event.html form; comes in on response object argument
-    eventName = request.POST["eventName"]
-    description = request.POST["description"]
-    city = request.POST["city"]
-    startDate = request.POST["startDate"]
-    endDate = request.POST["endDate"]
-    venue = request.POST["venue"]
+    data = request.body.decode("utf-8")
+    data2 = json.loads(data)
 
-    # convert HTML5 datetime-local to python datetime.datetime per Event begin/endTime model requirements
-    beginTime = convert_html_datetime_to_python_datetime(startDate)
-    endTime = convert_html_datetime_to_python_datetime(endDate)
+    eventName = data2["eventName"]
+    description = data2["description"]
+    city = data2["city"]
+    beginTime = data2["beginTime"]
+    endTime = data2["endTime"]
+    venueId = data2["venue"]
 
-    event_venue = get_object_or_404(Venue, pk=venue.pk)
+    event_venue = get_object_or_404(Venue, pk=venueId)
 
     new_event = Event.objects.create(
         name=eventName,
         description=description,
         city=city,
         beginTime=beginTime,
-        endTime=endTime
+        endTime=endTime,
+        venueId=event_venue
     )
 
-    new_event.venue_set.create(pk=event_venue.id)
+    new_event.save()
 
-    return HttpResponse("Create successful!")
+    return HttpResponse("Event created")
 
 
 def register_for_event(request):
@@ -204,12 +205,14 @@ def register_for_event(request):
     Args- request object (via POST, comes in as JSON)
     """
 
-    # still need to parse JSON coming in
-    user_id = request.POST['user_id']
-    event_id = request.POST['event_id']
+    data = request.body.decode('utf-8')
+    data2 = json.loads(data)
+    user_id = data2['user_id']
+    event_id = data2['event_id']
+    user = User.objects.get(pk=user_id)
     event = Event.objects.get(pk=event_id)
     venue = Venue.objects.get(pk=event.venueId.id)
-    registered_event = UserEvent.objects.create(userId=user_id, eventId=event_id)
+    registered_event = UserEvent.objects.create(userId=user, eventId=event)
     event.tickets_sold += 1
     event.save()
     if event.tickets_sold == venue.capacity:

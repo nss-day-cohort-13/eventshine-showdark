@@ -14,8 +14,9 @@ angular.module('app').config(function($routeProvider) {   // Takes out the # in 
                 controller: 'AllEventsCtrl',
                 // controllerAs: 'allEvents'
             })
-            .when('/single_event', {
-                templateUrl: '/static/app/partials/single_event.html',
-                controller: "SingleEventCtrl"
-            });
-    });
+            .when('/createEvent', {
+                templateUrl: '/static/app/partials/create_event.html',
+                controller: 'CreateEventCtrl',
+                // controllerAs: 'createEvent'
+            })
+    })
