@@ -6,6 +6,7 @@ from django.views import generic
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from .models import *
 from .utilities import *
 import json
@@ -33,6 +34,7 @@ class FailedLogin(generic.TemplateView):
     template_name = 'tickets/failedLogin.html'
 
 
+@csrf_exempt
 def loginUser(request):
     '''
     Login module for users
@@ -52,8 +54,9 @@ def loginUser(request):
     else:
         return HttpResponseRedirect('../failedLogin/')
 
+
 def get_current_user(request):
-    user = serializers.serialize("json", [request.user,])
+    user = serializers.serialize("json", [request.user, ])
     return HttpResponse(user, content_type="application/json")
 
 
@@ -115,6 +118,7 @@ def index(request):
 
 
 class Profile(generic.TemplateView):
+
     template_name = 'tickets/profile.html'
 
 
@@ -154,6 +158,7 @@ def get_all_venues(request):
         return HttpResponse(data, content_type="application/json")
     except:
         return HttpResponse("No venues registered")
+
 
 def get_all_events(request):
     """
