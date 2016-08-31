@@ -1,4 +1,4 @@
-angular.module('app').controller("CreateEventCtrl", function ($scope, $http, $location, $timeout) {
+angular.module('app').controller("CreateEventCtrl", function ($scope, $http, $location) {
 
     $scope.title = "Create an event!"
     $scope.venues = []
@@ -8,7 +8,6 @@ angular.module('app').controller("CreateEventCtrl", function ($scope, $http, $lo
         .then((res) => $scope.venues = res.data)
 
     $scope.create_event = function () {
-    	console.log("EVENT-VENUE: ", $scope.venue);
     	$http({
     		url: "http://localhost:8000/tickets/create_event",
 	    	method: "POST",
