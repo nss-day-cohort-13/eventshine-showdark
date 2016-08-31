@@ -1,2 +1,36 @@
+@import "mixins"
+
 *
 	box-sizing: border-box
+
+.wrapper
+	@include margins
+
+.inner-wrapper
+	width: 100%
+
+.event-card
+	display: flex
+	flex-flow: row wrap
+	justify-content: space-between
+	border: 1px solid black
+	border-radius: 3px
+	margin: 10px 0
+	h3
+		margin-top: 10px
+
+.event-info-right
+	justify-content: flex-end
+	flex-direction: column
+	padding: 10px 10px 10px 0
+
+.event-info-left
+	justify-content: flex-start
+	flex-direction: column
+	padding-left: 10px
+
+.info-label
+	font-weight: bold
+
+.register-button
+

@@ -1,17 +1,21 @@
 <!-- This has not been tested yet but this partial should show all events
 and include a button for the user to register-->
-<nav>
-  <button type="button" name="button" ng-click="backToProfile()">Profile Page</button>
-  <button type="button" name="button"ng-click="createEventPage()">Create Event</button>
+<nav class="nav">
+  <button class="btn btn-success events-button" type="button" name="button" ng-click="backToProfile()">Profile Page</button>
+  <button class="btn btn-primary events-button" type="button" name="button" ng-click="createEventPage()">Create Event</button>
 </nav>
 <section>
     <h1>((title))</h1>
-    <div ng-repeat="event in events">
-        <h3>((event.fields.name))</h3>
-        <p>Start time: <time>((event.fields.beginTime))</time></p>
-        <p>City: ((event.fields.city))</p>
-        <p>Description: ((event.fields.description))</p>
-        <button ng-click="register_for_event(event)" ng-style="{'display': event.fields.full ? 'none' : 'block'}">Register</button>
-        <div ng-show="event.fields.full">Registration for this event is full</div>
+    <div class="event-card" ng-repeat="event in events">
+        <div class="event-info event-info-left">
+            <h3>((event.fields.name))</h3>
+            <p>((event.fields.description))</p>
+        </div>
+        <div class="event-info event-info-right">
+            <p><span class="info-label">Start time:</span> <time>((event.fields.beginTime))</time></p>
+            <p><span class="info-label">City:</span> ((event.fields.city))</p>
+            <button class="btn btn-warning register-button" ng-click="register_for_event(event)" ng-style="{'display': event.fields.full ? 'none' : 'block'}">Register</button>
+            <div ng-show="event.fields.full">Registration for this event is full</div>
+        </div>
     </div>
 </section>
