@@ -1,4 +1,4 @@
-angular.module('app').controller("UserEventsCtrl", function ($scope, $http, $timeout){
+angular.module('app').controller("UserEventsCtrl", function ($scope, $http, $timeout, $location){
 
     $scope.title = "My Events"
     $http.get(`http://localhost:8000/tickets/get_user/`)
@@ -21,4 +21,8 @@ angular.module('app').controller("UserEventsCtrl", function ($scope, $http, $tim
     // $scope.delete_event = () => {
     //     $http.delete(`http://localhost:8000/tickets/${current_user_id}`)
     // }
+
+    $scope.allEvents = () => {
+      $location.path('/allEvents');
+    }
 })
