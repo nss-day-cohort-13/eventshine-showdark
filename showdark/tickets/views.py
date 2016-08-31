@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import *
 from .utilities import *
 import json
+import ast
 
 
 class Login(generic.TemplateView):
@@ -124,12 +125,11 @@ def get_users_events(request, user_id):
     """
 
     user = get_object_or_404(User, pk=user_id)
-    user_events = get_object_or_404(UserEvent, userId=user.id)
-    print(user_events)
+    user_events = get_list_or_404(UserEvent, userId=user.id)
     data = []
     try:
         for e in user_events:
-            event = Event.objects.get(pk=e.eventId)
+            event = Event.objects.get(pk=e.eventId.id)
             data.append(event)
     except TypeError:
         event = Event.objects.get(pk=user_events.eventId.id)
@@ -204,12 +204,14 @@ def register_for_event(request):
     Args- request object (via POST, comes in as JSON)
     """
 
-    # still need to parse JSON coming in
-    user_id = request.POST['user_id']
-    event_id = request.POST['event_id']
+    data = request.body.decode('utf-8')
+    data2 = json.loads(data)
+    user_id = data2['user_id']
+    event_id = data2['event_id']
+    user = User.objects.get(pk=user_id)
     event = Event.objects.get(pk=event_id)
     venue = Venue.objects.get(pk=event.venueId.id)
-    registered_event = UserEvent.objects.create(userId=user_id, eventId=event_id)
+    registered_event = UserEvent.objects.create(userId=user, eventId=event)
     event.tickets_sold += 1
     event.save()
     if event.tickets_sold == venue.capacity:
