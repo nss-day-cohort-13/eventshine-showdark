@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box; }
+
+.landing {
+  width: 90%;
+  margin: 20px auto 0;
+  border-radius: 5px; }
+  .landing h1, .landing h3, .landing p {
+    margin-left: 30px; }
+
+.login-form {
+  margin-left: 30px; }
+  .login-form input {
+    width: 30%; }
