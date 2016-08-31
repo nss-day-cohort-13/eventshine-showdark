@@ -32,5 +32,5 @@ angular.module('app').controller("CreateEventCtrl", function ($scope, $http, $lo
 
     $scope.allEvents = () => {
       $location.path('/allEvents');
-
+    }
 })
