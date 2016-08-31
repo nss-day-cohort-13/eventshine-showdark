@@ -5,11 +5,11 @@ angular.module('app').controller("AllEventsCtrl", function ($scope, $http, $loca
     $http.get(`http://localhost:8000/tickets/get_user/`)
       .then(function success (res){
         return $scope.current_user = res.data[0];
-      })
+      });
 
     // Request for every event
     $http.get("http://localhost:8000/tickets/events")
-     .then((res) => $scope.events = res.data)
+     .then((res) => $scope.events = res.data);
 
     // Is not connnected yet. This is supposed to register the user when
     // they click the register button on one of the events on the all events page.
@@ -21,6 +21,14 @@ angular.module('app').controller("AllEventsCtrl", function ($scope, $http, $loca
         (rej) => {
             // "failed to register" message
         })
+    }
+
+    $scope.backToProfile = () => {
+      $location.path('/');
+    }
+
+    $scope.createEventPage = () => {
+      $location.path('/createEvent');
     }
 
 })

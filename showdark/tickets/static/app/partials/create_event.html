@@ -3,8 +3,11 @@
 	-"action" attr redirects user to specified url
 	-"method" attr sends specified HTTP call with contents of form (as long as button is type="submit")
 -->
-
-<section ng-controller="CreateEventCtrl as createCtrl">
+<nav>
+  <button type="button" ng-click="allEvents()">View All Events</button>
+	<button type="button" name="button" ng-click="backToProfile()">Profile Page</button>
+</nav>
+<section>
 	<form action="../create_event" method="post" class="form-group">
 		<label>Name of event:</label>
 		<input class="form-control" type="text" name="eventName">

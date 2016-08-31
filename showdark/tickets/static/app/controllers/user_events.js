@@ -25,4 +25,8 @@ angular.module('app').controller("UserEventsCtrl", function ($scope, $http, $tim
     $scope.allEvents = () => {
       $location.path('/allEvents');
     }
+
+    $scope.createEventPage = () => {
+      $location.path('/allEvents');
+    }
 })

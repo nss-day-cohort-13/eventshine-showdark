@@ -1,12 +1,17 @@
 <!-- This has not been tested yet but this partial should show all events
 and include a button for the user to register-->
-
-<section ng-controller="AllEventsCtrl">
+<nav>
+  <button type="button" name="button" ng-click="backToProfile()">Profile Page</button>
+  <button type="button" name="button"ng-click="createEventPage()">Create Event</button>
+</nav>
+<section>
     <h1>((title))</h1>
     <div ng-repeat="event in events">
         <h3>((event.fields.name))</h3>
         <p>Start time: <time>((event.fields.beginTime))</time></p>
         <p>City: ((event.fields.city))</p>
-        <button ng-click="register_for_event(event)">Register</button>
+        <p>Description: ((event.fields.description))</p>
+        <button ng-click="register_for_event(event)" ng-style="{'display': event.fields.full ? 'none' : 'block'}">Register</button>
+        <div ng-show="event.fields.full">Registration for this event is full</div>
     </div>
 </section>
