@@ -1,11 +1,14 @@
 {% load staticfiles %}
+{% csrf_token %}
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
+  <link rel="stylesheet" type="text/css" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<title>Showdark | Get some tickets.</title>
 </head>
 <body>
   <div class="wrapper">
