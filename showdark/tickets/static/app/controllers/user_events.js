@@ -19,9 +19,6 @@ angular.module('app').controller("UserEventsCtrl", function ($scope, $http, $tim
     $http.get('http://localhost:8000/tickets/venues')
         .then((res) => $scope.event_venues = res.data);
 
-    $scope.create_event = function () {
-        $location.path("/createEvent")
-    }
 
     // $scope.delete_event = () => {
     //     $http.delete(`http://localhost:8000/tickets/${current_user_id}`)
@@ -32,6 +29,6 @@ angular.module('app').controller("UserEventsCtrl", function ($scope, $http, $tim
     }
 
     $scope.createEventPage = () => {
-      $location.path('/allEvents');
+      $location.path('/createEvent');
     }
 })
