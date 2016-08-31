@@ -18,4 +18,5 @@ angular.module('app').config(function($routeProvider) {   // Takes out the # in 
                 templateUrl: '/static/app/partials/create_event.html',
                 controller: 'CreateEventCtrl',
                 // controllerAs: 'createEvent'
+            })
     })
