@@ -1,16 +1,11 @@
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_list_or_404, get_object_or_404, render
-from django.urls import reverse
 from django.views import generic
 from django.core import serializers
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
-from .models import *
-from .utilities import *
+from .models import Venue, Event, UserEvent
 import json
-import ast
 
 
 class Login(generic.TemplateView):
@@ -46,23 +41,27 @@ def loginUser(request):
 
     if auth:
         try:
-            user = authenticateUser(request, userName, passWord)  # returns a user object if user is authenticated
+            user = authenticateUser(request, userName, passWord)
             login(request, user)
             return render(request, 'tickets/profile.html')
-        except:  # I dont know what the exception would be if the user authentication works but the login doesn't
+        except:
             return HttpResponseRedirect('../failedLogin/')
     else:
         return HttpResponseRedirect('../failedLogin/')
 
 
 def get_current_user(request):
+    """
+    Returns current user object as json data
+    """
     user = serializers.serialize("json", [request.user, ])
     return HttpResponse(user, content_type="application/json")
 
 
 def authenticateUser(request, userName, passWord):
     '''
-    Authentication module for users. Takes a user name and password (strings) for arguments.
+    Authentication module for users. Takes a user name and password
+    (strings) for arguments.
     Returns a user object if authentication is successful
     '''
     user = authenticate(username=userName, password=passWord)
@@ -83,8 +82,12 @@ def registerUser(request):
     lastName = request.POST['lastName']
     email = request.POST['email']
 
-    user = User.objects.create_user(username=userName, password=passWord, first_name=firstName,
-                                    last_name=lastName, email=email)
+    user = User.objects.create_user(
+        username=userName,
+        password=passWord,
+        first_name=firstName,
+        last_name=lastName, email=email
+    )
 
     # Permissions
     # Add
@@ -109,17 +112,7 @@ def logoutUser(request):
     Logout module for users
     '''
     logout(request)
-    # Redirect to success page
     return HttpResponseRedirect('/tickets/')
-
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the future login page.")
-
-
-class Profile(generic.TemplateView):
-
-    template_name = 'tickets/profile.html'
 
 
 def get_users_events(request, user_id):
@@ -171,7 +164,7 @@ def get_all_events(request):
 
 def create_event(request):
     """
-    Creates a new event based on form input from partials/create_event.html UNTESTED
+    Creates a new event based on form input from partials/create_event.html
 
     Args- request object
     """
