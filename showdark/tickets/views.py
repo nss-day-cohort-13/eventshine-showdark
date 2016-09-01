@@ -34,7 +34,7 @@ class FailedLogin(generic.TemplateView):
     template_name = 'tickets/failedLogin.html'
 
 
-@csrf_exempt
+# @csrf_exempt
 def loginUser(request):
     '''
     Login module for users

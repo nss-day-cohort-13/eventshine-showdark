@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box; }
+
+.wrapper {
+  width: 90%;
+  margin: 20px auto 0; }
+
+.inner-wrapper {
+  width: 100%; }
+
+.event-card {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin: 20px 0; }
+  .event-card h3 {
+    margin-top: 10px;
+    width: 100%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid grey; }
+
+.event-info-right {
+  justify-content: flex-end;
+  flex-direction: column;
+  padding: 10px 10px 10px 0; }
+
+.event-info-left {
+  justify-content: flex-start;
+  flex-direction: column;
+  padding-left: 10px; }
+
+.info-label {
+  font-weight: bold; }
+
+.register-button {
+  width: 100%; }
+
+.landing {
+  width: 90%;
+  margin: 20px auto 0;
+  border-radius: 5px; }
+  .landing h1, .landing h3, .landing p {
+    margin-left: 30px; }
+
+.login-form {
+  margin-left: 30px; }
+  .login-form input {
+    width: 30%; }
+
+.nav {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between; }
+
+.events-button {
+  width: 45%; }
+
+.my-event-card {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin: 20px 0; }
+  .my-event-card h3 {
+    width: 100%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid grey; }
+
+.my-event-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 10px; }
+
+.my-event-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 10px 10px 10px 0; }
+
+.create-form input {
+  width: 70%; }
+
+.create-form label {
+  margin-top: 10px; }
+
+.create-button {
+  margin-top: 10px; }

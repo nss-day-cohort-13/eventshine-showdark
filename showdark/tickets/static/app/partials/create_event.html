@@ -4,12 +4,13 @@
 	-"method" attr sends specified HTTP call with contents of form (as long as button is type="submit")
 -->
 
-<nav>
-  <button type="button" ng-click="allEvents()">View All Events</button>
-	<button type="button" name="button" ng-click="backToProfile()">Profile Page</button>
+<nav class="nav">
+	<button class="btn btn-success events-button" type="button" ng-click="allEvents()">View All Events</button>
+	<button class="btn btn-primary events-button" type="button" name="button" ng-click="backToProfile()">Profile Page</button>
 </nav>
 <section ng-controller="CreateEventCtrl as createCtrl">
-	<form class="form-group">
+	<h1>Create an event:</h1>
+	<form class="form-group create-form">
 		<label>Name of event:</label>
 		<input class="form-control" type="text" name="eventName" ng-model="eventName">
 		<label>Description:</label>
@@ -17,13 +18,15 @@
 		<label>City:</label>
 		<input class="form-control" type="text" name="city" ng-model="city">
 		<label>Start date and time:</label>
-		<input type="datetime-local" name="beginTime" ng-model="beginTime">
+		<input class="form-control" type="datetime-local" name="beginTime" ng-model="beginTime">
 		<label>End date and time:</label>
-		<input type="datetime-local" name="endTime" ng-model="endTime">
+		<input class="form-control" type="datetime-local" name="endTime" ng-model="endTime">
 		<label>Choose a venue:</label>
 		<select ng-model="venue">
 			<option ng-repeat="venue in venues" ng-value="venue.pk">((venue.fields.name))</option>
 		</select>
-		<button class="btn btn-success" type="submit" ng-click="create_event()">Create event</button>
+		<div>
+			<button class="btn btn-success create-button" type="submit" ng-click="create_event()">Create event</button>
+		</div>
 	</form>
 </section>

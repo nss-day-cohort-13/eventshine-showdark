@@ -1,31 +1,38 @@
 <!-- This has not been tested yet. It should show all events that the user is
 registered for-->
-<nav>
-  <button type="button" ng-click="allEvents()">View All Events</button>
-  <button type="button" name="button"ng-click="createEventPage()">Create Event</button>
-</nav>
-<section>
-    <h1>((title))</h1>
-    <div>
-        <div ng-repeat="event in user_events">
-            <!-- nested ng-repeats. The venue itself is not part of the event
-                so you have to call the events separately and match the venue id
-                to the venue id on the event. The if statement is comparing
-                venue id with event venue id-->
-            <div ng-repeat="venue in event_venues" ng-if="venue.pk==event.fields.venueId">
-                <h3>((event.fields.name))</h3>
-                <p>((event.fields.description))</p>
-                <p>Start time: <time>((event.fields.beginTime))</time></p>
-                <p>End time: <time>((event.fields.endTime))</time></p>
-                <p>((event.fields.city))</p>
-                <p>Venue Name and Address:</p>
-                <p>((venue.fields.name))</p>
-                <span>((venue.fields.streetAddress))</span>
-                <span>((venue.fields.city))</span>
-                <span>((venue.fields.state))</span>
-                <span>((venue.fields.zipCode))</span>
-            <!-- <button ng-click="delete_event(event)">Cancel Order</button> -->
+<div class="inner-wrapper">
+    <nav class="nav">
+      <button class="btn btn-success events-button" type="button" ng-click="allEvents()">View All Events</button>
+      <button class="btn btn-primary events-button" type="button" name="button" ng-click="createEventPage()">Create Event</button>
+    </nav>
+    <section>
+        <h1>((title))</h1>
+        <div>
+            <div ng-repeat="event in user_events">
+                <!-- nested ng-repeats. The venue itself is not part of the event
+                    so you have to call the events separately and match the venue id
+                    to the venue id on the event. The if statement is comparing
+                    venue id with event venue id-->
+                <div class="my-event-card" ng-repeat="venue in event_venues" ng-if="venue.pk==event.fields.venueId">
+                    <div class="my-event-left">
+                        <h3>((event.fields.name))</h3>
+                        <p>((event.fields.description))</p>
+                        <p><span class="info-label">Start time:</span> <time>((event.fields.beginTime))</time></p>
+                        <p><span class="info-label">End time:</span> <time>((event.fields.endTime))</time></p>
+                        <p>((event.fields.city))</p>
+                    </div>
+                    <div class="my-event-right">
+                        <p><span class="info-label">Venue Name and Address:</span></p>
+                        <p>((venue.fields.name))</p>
+                        <p>
+                            ((venue.fields.streetAddress))
+                            ((venue.fields.city))
+                            ((venue.fields.state))
+                            ((venue.fields.zipCode))
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-<!-- </section> -->
+    </section>
+</div>
