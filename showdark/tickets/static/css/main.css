@@ -81,3 +81,12 @@
   justify-content: flex-end;
   align-items: flex-end;
   padding: 10px 10px 10px 0; }
+
+.create-form input {
+  width: 70%; }
+
+.create-form label {
+  margin-top: 10px; }
+
+.create-button {
+  margin-top: 10px; }

@@ -10,7 +10,7 @@ gulp.task("sass", function() {
 })
 
 gulp.task("watch", function () {
-	gulp.watch("sass/**/*.s+(a|c)ss", ["sass"])
+	gulp.watch("sass/main.sass", ["sass"])
 })
 
 gulp.task("default", ["sass", "watch"])
