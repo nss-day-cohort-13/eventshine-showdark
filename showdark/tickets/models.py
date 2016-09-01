@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Venue(models.Model):
+    """ Stores a single venue, related to :model: 'tickets.Event' """
 
     name = models.CharField(max_length=200)
     streetAddress = models.CharField(max_length=300)
@@ -17,6 +18,10 @@ class Venue(models.Model):
 
 
 class Event(models.Model):
+    """
+    Stores a single event, related to :model: 'tickets.Venue' and
+    'tickets.UserEvent'
+    """
 
     venueId = models.ForeignKey(Venue, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
@@ -33,6 +38,10 @@ class Event(models.Model):
 
 
 class UserEvent(models.Model):
+    """
+    Stores a single event that a user is attending, related to
+    :model: 'tickets.Event'
+    """
 
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     eventId = models.ForeignKey(Event, on_delete=models.CASCADE)
